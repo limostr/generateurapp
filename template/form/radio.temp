@@ -1,0 +1,11 @@
+$this->addElement("{Field}",array(
+"type"=>"radio"
+,"options"=>array(
+"other"=>array(
+"required"=>"{required}"
+,"title"=>"{Field}"
+)
+)
+,"name"=>"{Field}"
+,"label"=>"{Field}"
+ ));

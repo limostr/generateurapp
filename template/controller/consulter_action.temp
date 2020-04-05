@@ -1,0 +1,27 @@
+/**
+* edit{Table}
+**/
+public function consulter{Table}(){
+        $Vue=new View();
+
+        $Vue->disablelayout();
+        {ids}
+
+        if({cnd}){
+            $Vue->mode="Update";
+            $where=$params="";
+            {where}
+            $Rec{Table}=dbadapter::Select("{Table}",$where);
+            $Rec{Table}_Row= $Rec{Table} ? $Rec{Table}[0] : array();
+
+            $Vue->liste= $Rec{Table}_Row ? $Rec{Table}_Row : array();
+            $datas=array(
+                {datas}
+            );
+            {linked_Datas}
+            $Vue->datas= $datas;
+        }
+
+        $Vue->titre = "{Table}_Edit_Titre";
+        $Vue->generate();
+}

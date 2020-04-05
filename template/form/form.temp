@@ -1,0 +1,18 @@
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Horizontal Form</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        <div class="box-body">
+             {form_elements}
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+
+
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>

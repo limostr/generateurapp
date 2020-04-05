@@ -1,0 +1,61 @@
+<script>
+
+    $(function(){
+
+
+        var optmyform = {
+            beforeSend: function()  { },
+            uploadProgress: function(event, position, total, percentComplete) { },
+            success: function() { },
+            complete: function(response)
+            {
+
+
+                var obj = JSON.parse(response.responseText);
+                if(obj.status=="success"){
+                    $("#messageEditperiode_Titre").html("<div class='alert alert-success'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'><?=\lib\Langue::getString('Success_save_periode')?></h4>"
+                        +"<p> "+obj.message
+                        +" </p> </div>");
+
+                       loadPage("listerperiode","content_listerperiode");
+
+                    $("#periode")[0].reset();
+
+                }else{
+
+                    $("#messageEditperiode_Titre").html("<div class='alert alert-block alert-error fade in'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'><?=\lib\Langue::getString('Error_save_periode')?></h4>"
+                        +"<p id='merreur'> "+obj.message
+                        +" </p> </div>");
+
+
+                }
+                return true;
+
+            },
+            error: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                $("#messageEditperiode_Titre").html("<div class='alert alert-block alert-error fade in'>"
+                    +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                    +"<h4 class='alert-heading'><?=\lib\Langue::getString('Success_save_periode')?></h4>"
+                    +"<p> "+obj.message
+                    +" </p> </div>");
+
+                return false;
+            }
+
+        };
+
+          $("#periode").ajaxForm(optmyform);
+
+
+    });
+</script>
+
+<div id="messageEditperiode_Titre"></div>
+<h1><?=\lib\Langue::getString("Edit_periode")?></h1>
+<?=$this->form?>

@@ -1,0 +1,40 @@
+<script>
+
+    function loadPage(page,zone){
+        $.ajax({
+            type:"POST"
+            ,url:"index.php?activity="+page
+
+            ,beforeSend:function(){
+                $('#'+zone).html("<i class='icon fa fa-gears'></i> <?=\lib\Langue::getString('Chargement_classscool')?>");
+            }
+            ,success:function(reponse){
+                $('#'+zone).html(reponse);
+            }
+        });
+    }
+
+    $(function(){
+        loadPage("editclassscool","edit_editclassscool");
+        loadPage("listerclassscool","content_listerclassscool");
+    });
+</script>
+
+<div class ="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header"><?=\lib\Langue::getString("Edit_classscool")?></div>
+            <div class="box-body" id="edit_editclassscool">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header"><?=\lib\Langue::getString("Lister_classscool")?></div>
+            <div class="box-body" id="content_listerclassscool">
+
+            </div>
+        </div>
+    </div>
+</div>

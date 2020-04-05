@@ -1,0 +1,16 @@
+            /**
+            * liste{Table}
+            **/
+            public function lister{Table}(){
+                $Vue=new View();
+                $Vue->disablelayout();
+                ${Table}Recs=dbadapter::SelectSQL("SELECT * FROM {Table}");
+                $Vue->liste= ${Table}Recs ? ${Table}Recs : array();
+                $Header=array(
+                    {header_cols}
+                );
+            {linked_Cols}
+            $Vue->Header =$Header;
+                $Vue->titre = "Lister_Titre_{Table}";
+                $Vue->generate();
+            }

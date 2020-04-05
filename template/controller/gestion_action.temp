@@ -1,0 +1,4 @@
+public function gestion{Table}(){
+$Vue=new View();
+$Vue->generate();
+}

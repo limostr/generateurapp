@@ -1,0 +1,40 @@
+<script>
+
+    function loadPage(page,zone){
+        $.ajax({
+            type:"POST"
+            ,url:"index.php?activity="+page
+
+            ,beforeSend:function(){
+                $('#'+zone).html("<i class='icon fa fa-gears'></i> <?=\lib\Langue::getString('Chargement_activiterressources')?>");
+            }
+            ,success:function(reponse){
+                $('#'+zone).html(reponse);
+            }
+        });
+    }
+
+    $(function(){
+        loadPage("editactiviterressources","edit_editactiviterressources");
+        loadPage("listeractiviterressources","content_listeractiviterressources");
+    });
+</script>
+
+<div class ="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header"><?=\lib\Langue::getString("Edit_activiterressources")?></div>
+            <div class="box-body" id="edit_editactiviterressources">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header"><?=\lib\Langue::getString("Lister_activiterressources")?></div>
+            <div class="box-body" id="content_listeractiviterressources">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<script type="text/javascript">
+
+
+    function edit(params){
+
+          $.ajax({
+              type:"POST"
+              ,url: "index.php?activity=edit{Table}"
+              ,data:{{idp}:params,mode:"<?=$this->mode?>"}
+              ,beforeSend:function(){
+                  $('#edit_{edit}').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+              }
+              ,success:function(reponse){
+                     $('#edit_{edit}').html(reponse);
+              }
+          });
+
+    }
+    function consulter(params){
+
+          $.ajax({
+              type:"POST"
+              ,url: "index.php?activity=consulter{Table}"
+              ,data:{{idp}:params}
+              ,beforeSend:function(){
+                  $('#edit_{edit}').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+              }
+              ,success:function(reponse){
+                   $('#edit_{edit}').html(reponse);
+              }
+          });
+
+    }
+    function deleteAct(params) {
+
+        $.confirm({
+            title: '<?=\lib\Langue::getString('Confirm_delete_{Table}')?>!!',
+            content: '<?=\lib\Langue::getString('Confirm_delete_{Table}')?>!!',
+            buttons: {
+                confirm:{
+                    text: "<i class='icon fa fa-trash'></i>Supprimer",
+                    btnClass: 'btn-danger',
+
+                    action :function () {
+                        $.ajax({
+                            type:"POST"
+                            ,url: "index.php?activity=delete{Table}"
+                            ,data:{{idp}:params}
+                            ,beforeSend:function(){
+                                $('#content_defin').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+                            }
+                            ,success:function(reponse){
+                                var obj = JSON.parse(reponse);
+                                if(obj.status=="success") {
+                                  loadPage("{lister}","content_{lister}");
+
+                                }else{
+                                    $.alert("<?=\lib\Langue::getString('Problem_delete_{Table}')?>! "+obj.message);
+                                }
+
+
+                            }
+                        });
+                    }
+                } ,
+                cancel:  {
+                    text: 'Annuler',
+                    btnClass: 'btn-warning',
+                    action: function(){
+                        $.alert('<?=\lib\Langue::getString('Annuler_delete_{Table}')?>');
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>

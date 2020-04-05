@@ -1,0 +1,10 @@
+
+public function Select{Table}(){
+    $options[""]="Selectionner";
+    $Rec{Table}=dbadapter::SelectSQL("SELECT * FROM {Table}");
+    foreach ($Rec{Table} as $r){
+        $options[$r['{id}']]=$r[1];
+
+    }
+    return $options;
+}

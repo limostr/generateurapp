@@ -1,0 +1,27 @@
+{scriptjs}
+<table class="table table-bordered table-striped">
+    <caption><?=\lib\Langue::getString("Lister_{Table}")?></caption>
+    <thead>
+    <tr>
+        <?php foreach ($this->Header as $keyhead => $head):?>
+            <th><?=\lib\Langue::getString($head)?></th>
+        <?php endforeach;?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($this->liste as $e):?>
+        <tr>
+            <?php foreach ($this->Header as $keyhead => $head):?>
+              <?php if(count($this->LinkedId) && isset($this->LinkedId['$keyhead'])):?>
+              <td></td>
+              <?php else :?>
+                <td><?=$e["$keyhead"]?></td>
+              <?php endif;?>
+            <?php endforeach;?>
+            <td>
+                {ActionsBtn}
+            </td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>

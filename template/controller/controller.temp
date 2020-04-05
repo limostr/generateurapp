@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by {GENERATOR}.
+ * User: {USER}
+ * Date: {DATE}
+ * Time: {DATE} {TIME}
+ */
+namespace blocapp\modules\{module}\Controllers;
+
+use lib\mvc\Controller;
+use lib\mvc\View;
+use lib\dbadapter;
+{use_forms}
+class {CONTROLE_NAME} extends Controller
+{
+    {actions}
+
+}

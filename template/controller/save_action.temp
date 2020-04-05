@@ -1,0 +1,35 @@
+    /**
+    * save{Table}
+    **/
+    public function save{Table}(){
+        try{
+
+            dbadapter::beginTransaction();
+
+            $mode = $this->_getRequest("mode","New");
+
+            ${Table}NewRec = new \stdClass();
+            {ZONE_ATTRIB_VALUE}
+
+            if($mode=="New"){
+               $id=dbadapter::Insert("{Table}",${Table}NewRec);
+            }elseif($mode="Update"){
+                ${Table}Where = new \stdClass();
+                {ZONE_ATTRIB_WHERE}
+                $id=dbadapter::Update("{Table}",${Table}NewRec,${Table}Where);
+            }
+
+
+            dbadapter::Commit();
+            if($mode=="New"){
+               echo json_encode(array("status"=>"success","message"=>"Personne ajouter"));
+            }elseif($mode="Update"){
+                echo json_encode(array("status"=>"success","message"=>"Personne Mis ajours"));
+            }
+
+        }catch (Exception $e){
+            echo json_encode(array("status"=>"erreur","message"=>$e->getMessage()));
+            dbadapter::Rolback();
+
+        }
+    }

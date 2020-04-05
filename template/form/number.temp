@@ -1,0 +1,15 @@
+$this->addElement("{Field}",array(
+            "type"=>"number"
+            ,"options"=>array(
+            "other"=>array(
+            "min"=>0
+            ,"max"=>"{max}"
+            ,"placeholder"=>"{Field}"
+            ,"required"=>"{required}"
+            ,"title"=>"{Field}"
+        )
+    )
+    ,"name"=>"{Field}"
+    ,"label"=>"{Field}"
+ ));
+

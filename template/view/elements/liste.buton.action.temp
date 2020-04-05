@@ -1,0 +1,5 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-info btn-flat" onclick="edit();"><i class="fa fa-align-left"></i>Edit</button>
+  <button type="button" class="btn btn-info btn-flat" onclick="delete();"><i class="fa fa-align-center"></i>Supprimer</button>
+  <button type="button" class="btn btn-info btn-flat" onclick="consulter();"><i class="fa fa-align-right"></i>Consulter</button>
+</div>

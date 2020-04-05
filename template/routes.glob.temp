@@ -1,0 +1,12 @@
+<?php
+
+global $_Routes;
+$_Routes=array(
+  "index"=>array(
+                      "Module"=>"defaultmodule"
+                      ,"Controller"=>"index"
+                      ,"Action"=>"index"
+                      ,"Roles"=>array()
+  ),
+{Routes}
+);

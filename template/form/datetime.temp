@@ -1,0 +1,12 @@
+$this->addElement("{Field}",array(
+            "type"=>"datetime"
+            ,"options"=>array(
+            "other"=>array(
+             "required"=>"{required}"
+            ,"title"=>"{Field}"
+        )
+    )
+    ,"name"=>"{Field}"
+    ,"label"=>"{Field}"
+ ));
+

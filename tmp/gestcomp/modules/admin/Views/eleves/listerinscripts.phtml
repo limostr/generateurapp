@@ -1,0 +1,110 @@
+<script type="text/javascript">
+
+
+    function edit(params){
+
+          $.ajax({
+              type:"POST"
+              ,url: "index.php?activity=editinscripts"
+              ,data:{idinscripts:params,mode:"<?=$this->mode?>"}
+              ,beforeSend:function(){
+                  $('#edit_editinscripts').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+              }
+              ,success:function(reponse){
+                     $('#edit_editinscripts').html(reponse);
+              }
+          });
+
+    }
+    function consulter(params){
+
+          $.ajax({
+              type:"POST"
+              ,url: "index.php?activity=consulterinscripts"
+              ,data:{idinscripts:params}
+              ,beforeSend:function(){
+                  $('#edit_editinscripts').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+              }
+              ,success:function(reponse){
+                   $('#edit_editinscripts').html(reponse);
+              }
+          });
+
+    }
+    function deleteAct(params) {
+
+        $.confirm({
+            title: '<?=\lib\Langue::getString('Confirm_delete_inscripts')?>!!',
+            content: '<?=\lib\Langue::getString('Confirm_delete_inscripts')?>!!',
+            buttons: {
+                confirm:{
+                    text: "<i class='icon fa fa-trash'></i>Supprimer",
+                    btnClass: 'btn-danger',
+
+                    action :function () {
+                        $.ajax({
+                            type:"POST"
+                            ,url: "index.php?activity=deleteinscripts"
+                            ,data:{idinscripts:params}
+                            ,beforeSend:function(){
+                                $('#content_defin').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+                            }
+                            ,success:function(reponse){
+                                var obj = JSON.parse(reponse);
+                                if(obj.status=="success") {
+                                  loadPage("listerinscripts","content_listerinscripts");
+
+                                }else{
+                                    $.alert("<?=\lib\Langue::getString('Problem_delete_inscripts')?>! "+obj.message);
+                                }
+
+
+                            }
+                        });
+                    }
+                } ,
+                cancel:  {
+                    text: 'Annuler',
+                    btnClass: 'btn-warning',
+                    action: function(){
+                        $.alert('<?=\lib\Langue::getString('Annuler_delete_inscripts')?>');
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>
+
+<table class="table table-bordered table-striped">
+    <caption><?=\lib\Langue::getString("Lister_inscripts")?></caption>
+    <thead>
+    <tr>
+        <?php foreach ($this->Header as $keyhead => $head):?>
+            <th><?=\lib\Langue::getString($head)?></th>
+        <?php endforeach;?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($this->liste as $e):?>
+        <tr>
+            <?php foreach ($this->Header as $keyhead => $head):?>
+              <?php if(count($this->LinkedId) && isset($this->LinkedId['$keyhead'])):?>
+              <td></td>
+              <?php else :?>
+                <td><?=$e["$keyhead"]?></td>
+              <?php endif;?>
+            <?php endforeach;?>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="deleteAct('<?=$e['idinscripts']?>')"><i class="fa fa-trash"></i></button>
+
+<button type="button" class="btn btn-success" onclick="edit('<?=$e['idinscripts']?>')"><i class="fa fa-edit"></i></button>
+
+<button type="button" class="btn btn-info" onclick="consulter('<?=$e['idinscripts']?>')"><i class="fa fa-eye"></i></button>
+
+            </td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>

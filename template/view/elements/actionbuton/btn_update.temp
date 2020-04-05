@@ -1,0 +1,1 @@
+<button type="button" class="btn btn-success" onclick="edit('<?=$e['{id}']?>')"><i class="fa fa-edit"></i></button>

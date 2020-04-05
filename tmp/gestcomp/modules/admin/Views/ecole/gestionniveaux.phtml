@@ -1,0 +1,40 @@
+<script>
+
+    function loadPage(page,zone){
+        $.ajax({
+            type:"POST"
+            ,url:"index.php?activity="+page
+
+            ,beforeSend:function(){
+                $('#'+zone).html("<i class='icon fa fa-gears'></i> <?=\lib\Langue::getString('Chargement_niveaux')?>");
+            }
+            ,success:function(reponse){
+                $('#'+zone).html(reponse);
+            }
+        });
+    }
+
+    $(function(){
+        loadPage("editniveaux","edit_editniveaux");
+        loadPage("listerniveaux","content_listerniveaux");
+    });
+</script>
+
+<div class ="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header"><?=\lib\Langue::getString("Edit_niveaux")?></div>
+            <div class="box-body" id="edit_editniveaux">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header"><?=\lib\Langue::getString("Lister_niveaux")?></div>
+            <div class="box-body" id="content_listerniveaux">
+
+            </div>
+        </div>
+    </div>
+</div>

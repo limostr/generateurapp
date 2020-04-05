@@ -1,0 +1,27 @@
+        /**
+        * edit{Table}
+        **/
+        public function edit{Table}(){
+                $Vue=new View();
+
+                $Vue->disablelayout();
+                {ids}
+                $form = new form{Table}("{Table}");
+
+                if({cnd}){
+                    $Vue->mode="Update";
+                    $where=$params="";
+                    {where}
+                    $Rec{Table}=dbadapter::Select("{Table}",$where);
+                    $Rec{Table}_Row= $Rec{Table} ? $Rec{Table}[0] : array();
+                    $form->initValues($Rec{Table}_Row);
+                    {prams}
+                    $form->setAction("?activity=save{Table}&mode=Update&".$params);
+                }else{
+                    $form->setAction("?activity=save{Table}&mode=New");
+                    $Vue->mode="New";
+                }
+                $Vue->form=$form;
+                $Vue->titre = "{Table}_Edit_Titre";
+                $Vue->generate();
+        }

@@ -1,0 +1,1 @@
+            "{attrib}"=>\lib\Langue::getString("Col_{attrib}") 

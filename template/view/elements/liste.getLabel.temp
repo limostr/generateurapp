@@ -1,0 +1,3 @@
+$where.=empty($where) ? "{id}='".${id}."'" : " AND {id}='".${id}."'";
+$Rec{Table}=dbadapter::Select("{Table}",$where);
+$Rec{Table}_Row= $Rec{Table} ? $Rec{Table}[0] : array();

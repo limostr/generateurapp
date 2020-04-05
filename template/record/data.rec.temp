@@ -1,0 +1,1 @@
+${TABLE_NAME}NewRec->{CCOL_NAME} = $this->_getRequest("{COL_NAME}") ;

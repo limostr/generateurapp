@@ -1,0 +1,110 @@
+<script type="text/javascript">
+
+
+    function edit(params){
+
+          $.ajax({
+              type:"POST"
+              ,url: "index.php?activity=editressources"
+              ,data:{idressources:params,mode:"<?=$this->mode?>"}
+              ,beforeSend:function(){
+                  $('#edit_editressources').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+              }
+              ,success:function(reponse){
+                     $('#edit_editressources').html(reponse);
+              }
+          });
+
+    }
+    function consulter(params){
+
+          $.ajax({
+              type:"POST"
+              ,url: "index.php?activity=consulterressources"
+              ,data:{idressources:params}
+              ,beforeSend:function(){
+                  $('#edit_editressources').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+              }
+              ,success:function(reponse){
+                   $('#edit_editressources').html(reponse);
+              }
+          });
+
+    }
+    function deleteAct(params) {
+
+        $.confirm({
+            title: '<?=\lib\Langue::getString('Confirm_delete_ressources')?>!!',
+            content: '<?=\lib\Langue::getString('Confirm_delete_ressources')?>!!',
+            buttons: {
+                confirm:{
+                    text: "<i class='icon fa fa-trash'></i>Supprimer",
+                    btnClass: 'btn-danger',
+
+                    action :function () {
+                        $.ajax({
+                            type:"POST"
+                            ,url: "index.php?activity=deleteressources"
+                            ,data:{idressources:params}
+                            ,beforeSend:function(){
+                                $('#content_defin').html("<i class='icon fa fa-gears'></i> chargement Encours...");
+                            }
+                            ,success:function(reponse){
+                                var obj = JSON.parse(reponse);
+                                if(obj.status=="success") {
+                                  loadPage("listerressources","content_listerressources");
+
+                                }else{
+                                    $.alert("<?=\lib\Langue::getString('Problem_delete_ressources')?>! "+obj.message);
+                                }
+
+
+                            }
+                        });
+                    }
+                } ,
+                cancel:  {
+                    text: 'Annuler',
+                    btnClass: 'btn-warning',
+                    action: function(){
+                        $.alert('<?=\lib\Langue::getString('Annuler_delete_ressources')?>');
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>
+
+<table class="table table-bordered table-striped">
+    <caption><?=\lib\Langue::getString("Lister_ressources")?></caption>
+    <thead>
+    <tr>
+        <?php foreach ($this->Header as $keyhead => $head):?>
+            <th><?=\lib\Langue::getString($head)?></th>
+        <?php endforeach;?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($this->liste as $e):?>
+        <tr>
+            <?php foreach ($this->Header as $keyhead => $head):?>
+              <?php if(count($this->LinkedId) && isset($this->LinkedId['$keyhead'])):?>
+              <td></td>
+              <?php else :?>
+                <td><?=$e["$keyhead"]?></td>
+              <?php endif;?>
+            <?php endforeach;?>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="deleteAct('<?=$e['idressources']?>')"><i class="fa fa-trash"></i></button>
+
+<button type="button" class="btn btn-success" onclick="edit('<?=$e['idressources']?>')"><i class="fa fa-edit"></i></button>
+
+<button type="button" class="btn btn-info" onclick="consulter('<?=$e['idressources']?>')"><i class="fa fa-eye"></i></button>
+
+            </td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>

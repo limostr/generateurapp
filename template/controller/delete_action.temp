@@ -1,0 +1,23 @@
+   /**
+   * delete{Table}
+   */
+    public function delete{Table}(){
+        try{
+
+            dbadapter::beginTransaction();
+
+            ${Table}Where = new \stdClass();
+            {ZONE_ATTRIB_WHERE}
+            dbadapter::delete("{Table}",${Table}Where);
+
+
+            dbadapter::Commit();
+
+            echo json_encode(array("status"=>"success","message"=>"{Table} Supprimer"));
+
+        }catch (Exception $e){
+            echo json_encode(array("status"=>"erreur","message"=>$e->getMessage()));
+            dbadapter::Rolback();
+
+        }
+    }

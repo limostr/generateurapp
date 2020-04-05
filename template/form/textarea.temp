@@ -1,0 +1,13 @@
+$this->addElement("{Field}",array(
+    "type"=>"textarea"
+    ,"options"=>array(
+        "other"=>array(
+        "rows"=>3
+        ,"cols"=>50
+        ,"required"=>"{required}"
+        ,"title"=>"{Field}"
+        )
+    )
+    ,"name"=>"{Field}"
+    ,"label"=>"{Field}"
+));

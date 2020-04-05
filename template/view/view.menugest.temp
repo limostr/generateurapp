@@ -1,0 +1,44 @@
+<script>
+
+    function loadPage(page,zone){
+        $.ajax({
+            type:"POST"
+            ,url:"index.php?activity="+page
+
+            ,beforeSend:function(){
+                $('#'+zone).html("<i class='icon fa fa-gears'></i> <?=\lib\Langue::getString('Chargement_{Table}')?>");
+            }
+            ,success:function(reponse){
+                $('#'+zone).html(reponse);
+            }
+        });
+    }
+
+    $(function(){
+        loadPage("{edit}","edit_{edit}");
+        loadPage("{lister}","content_{lister}");
+    });
+</script>
+
+<div class ="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body">
+{menu}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class ="row">
+    <div class="col-md-12">
+        <div class="box">
+
+            <div class="box-body" id="zone_affiche">
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,6 @@
+    "{activity}"=>array(
+                        "Module"=>"{module}"
+                        ,"Controller"=>"{controller}"
+                        ,"Action"=>"{action}"
+                        ,"Roles"=>array()
+    )

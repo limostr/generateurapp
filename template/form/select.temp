@@ -1,0 +1,15 @@
+
+$options{Field}=$this->Select{Table}();
+$this->addElement("{Field}",array(
+            "type"=>"select"
+            ,"list"=>$options{Field}
+            ,"options"=>array(
+            "other"=>array(
+                "placeholder"=>"{Field}"
+                ,"required"=>"{required}"
+                ,"title"=>"{Field}"
+         )
+        )
+,"name"=>"{Field}"
+,"label"=>"{Field}"
+ ));

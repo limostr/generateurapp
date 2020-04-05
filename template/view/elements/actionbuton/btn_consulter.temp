@@ -1,0 +1,1 @@
+<button type="button" class="btn btn-info" onclick="consulter('<?=$e['{id}']?>')"><i class="fa fa-eye"></i></button>

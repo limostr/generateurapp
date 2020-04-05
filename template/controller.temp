@@ -1,0 +1,65 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: kikou
+ * Date: 05/12/2017
+ * Time: 15:43
+ */
+include dirname(__FILE__)."/../../../../lib/mvc/Controller.php";
+include dirname(__FILE__)."/../../../../lib/mvc/View.php";
+
+class {TABLE_NAME} extends Controller
+{
+
+    public function gestion{TABLE_NAME}(){
+        $Vue=new View();
+
+
+        $Vue->generate();
+    }
+    public function listofproject(){
+        $Vue=new View();
+        $Vue->disablelayout();
+
+        ${TABLE_NAME}s=dbadapter::SelectSQL("SELECT * FROM {TABLE_NAME} ");
+        $Vue->{TABLE_NAME}s= ${TABLE_NAME}s ? ${TABLE_NAME}s : array();
+        $Vue->titre = "Liste des {TABLE_NAME}s";
+        $Vue->generate();
+    }
+
+    public function addnewproject(){
+        $Vue=new View();
+        $Vue->disablelayout();
+        $anneeuniv=dbadapter::SelectSQL("SELECT * FROM  annueeuniv");
+        $Vue->anneeuniv = $anneeuniv;
+        $Vue->formation=dbadapter::SelectSQL("SELECT * FROM formation");
+
+        $Vue->mode="New";
+        $Vue->titre = "Liste des {TABLE_NAME}s";
+        $Vue->generate();
+    }
+
+
+
+    public function delete(){
+        try{
+
+
+            $id =$this->_getRequest("id");
+
+            ${TABLE_NAME}= new stdClass();
+            ${TABLE_NAME}->ID_{TABLE_NAME}=$id;
+            dbadapter::delete("{TABLE_NAME}",${TABLE_NAME});
+
+
+
+            echo json_encode(array("status"=>"success","message"=>"{TABLE_NAME} Supprimer"));
+
+        }catch (Exception $e){
+            echo json_encode(array("status"=>"erreur","message"=>$e->getMessage()));
+
+
+        }
+    }
+ 
+}
